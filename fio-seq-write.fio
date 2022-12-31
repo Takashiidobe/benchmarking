@@ -1,0 +1,17 @@
+; fio-seq-write.job for fiotest
+
+[global]
+name=fio-seq-write
+filename=test.txt
+rw=write
+bs=256K
+direct=0
+numjobs=1
+time_based
+runtime=15
+fsync=1
+
+[file1]
+size=1m
+ioengine=libaio
+iodepth=16

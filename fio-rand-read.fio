@@ -1,0 +1,14 @@
+[global]
+name=fio-seq-reads
+filename=test.txt
+rw=randread
+bs=256K
+direct=1
+numjobs=1
+time_based
+runtime=15
+
+[file1]
+size=1m
+ioengine=libaio
+iodepth=16
