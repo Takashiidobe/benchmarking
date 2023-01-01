@@ -1,0 +1,15 @@
+[global]
+name=io-uring-seqwrite-fsync
+filename=test.txt
+rw=write
+bs=256K
+direct=0
+numjobs=1
+iodepth=32
+time_based
+runtime=15
+fsync=1
+
+[file1]
+size=1m
+ioengine=io_uring

@@ -1,0 +1,14 @@
+[global]
+name=sync-seqwrite
+filename=test.txt
+rw=write
+bs=256K
+direct=0
+numjobs=1
+iodepth=1
+time_based
+runtime=15
+
+[file1]
+size=1m
+ioengine=sync

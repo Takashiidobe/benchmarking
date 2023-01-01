@@ -1,17 +1,15 @@
-; fio-seq-write.job for fiotest
-
 [global]
-name=fio-seq-write
+name=io-uring-randwrite
 filename=test.txt
-rw=write
+rw=randwrite
 bs=256K
 direct=0
 numjobs=1
+iodepth=32
 time_based
 runtime=15
 fsync=1
 
 [file1]
 size=1m
-ioengine=libaio
-iodepth=16
+ioengine=io_uring

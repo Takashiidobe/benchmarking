@@ -1,0 +1,14 @@
+[global]
+name=io-uring-seqread
+filename=test.txt
+rw=read
+bs=256K
+direct=0
+numjobs=1
+iodepth=32
+time_based
+runtime=15
+
+[file1]
+size=1m
+ioengine=io_uring
