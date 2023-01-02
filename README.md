@@ -7,7 +7,10 @@ Only reading with io_uring comes close to using the full bandwidth of the SSD on
 
 Fsync also seems to have a lot of overhead when using `write()` and `aio_write()` (causing a 3x slowdown), but far less overhead with `io_uring` (20% overhead on sequential writes, 50% overhead on random writes).
 
-- synchronous sequential write - fsync: ~2.4k ops/s, (623MB/s)
+**TODO: Fix benchmarks. These benchmarks are the same write speed regardless of the method used, which is most likely not correct. Need a benchmark that exploits more parallelism.**
+
+- synchronous sequential write - fsync (1MB bs): 248 ops/s, (1041MB/s)
+- synchronous sequential write - fsync (256KB bs): ~2.4k ops/s, (623MB/s)
 - synchronous sequential write + fsync: ~850 ops/s, (222MB/s)
 - synchronous random write - fsync: ~2.4k ops/s, (644MB/s)
 - synchronous random write + fsync: ~800 ops/s, (214MB/s)
@@ -39,6 +42,26 @@ Fsync also seems to have a lot of overhead when using `write()` and `aio_write()
 - Process context switch: (~2.5μs)
 - Thread context switches w/ futex: (~2.2μs)
 - Thread context switches w/ sched_yield: (~374.2ns)
+
+## Hashing
+
+md5:              404.15 MiB/sec
+crc64:            258.36 MiB/sec
+crc32:            230.60 MiB/sec
+crc32c:          4682.73 MiB/sec
+crc16:            252.24 MiB/sec
+crc7:             258.89 MiB/sec
+sha1:             432.36 MiB/sec
+sha256:           187.43 MiB/sec
+sha512:           302.18 MiB/sec
+xxhash:          1827.80 MiB/sec
+murmur3:         1826.07 MiB/sec
+jhash:           1542.84 MiB/sec
+fnv:             3720.28 MiB/sec
+sha3-224:          59.47 MiB/sec
+sha3-256:          56.14 MiB/sec
+sha3-384:          42.18 MiB/sec
+sha3-512:          24.17 MiB/sec
 
 ## Historical
 
